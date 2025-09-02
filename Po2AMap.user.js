@@ -4,8 +4,8 @@
 // @name 	 IITC Plugin: Portal to AMap
 // @namespace 	 https://github.com/Xyinkl/IITC-Po2AMap
 // @version 	 0.0.6
-// @updateURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/main/Po2AMap.user.js
-// @downloadURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/main/Po2AMap.user.js
+// @updateURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/refs/heads/main/Po2AMap.user.js
+// @downloadURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/refs/heads/main/Po2AMap.user.js
 // @description 	 Just a iitc plugin to convert Portal location to Chinese Map Provider AMAP. With this you can get precise portal location in AMAP, and just navigate to it! And do whatever you want. 
 // @author 	 Xyinkl
 // @match	   https://intel.ingress.com/*
