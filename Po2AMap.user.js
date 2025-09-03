@@ -2,7 +2,7 @@
 // @id 	 iitc-Po2AMap
 // @name 	 IITC Plugin: Portal to AMap
 // @namespace 	 https://github.com/Xyinkl/IITC-Po2AMap
-// @version 	 0.0.6
+// @version 	 0.0.8
 // @updateURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/refs/heads/main/Po2AMap.user.js
 // @downloadURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/refs/heads/main/Po2AMap.user.js
 // @description 	 Just a iitc plugin to convert Portal location to Chinese Map Provider AMAP. With this you can get precise portal location in AMAP, and just navigate to it! And do whatever you want. 
@@ -16,9 +16,9 @@ function wrapper(plugin_info) {
     if(typeof window.plugin !== 'function') window.plugin = function(){};
     window.plugin.portal2amap = function(){};
     var self = window.plugin.portal2amap;
-    self.id = 'portal2amap';
+    self.id = 'PoAMap';
     self.title = '打开高德链接';
-    self.version = '0.6';
+    self.version = '0.0.8';
     self.author = 'Xyinkl';
     self.outOfChina = function(lat, lon) {
         return (lon < 72.004 || lon > 137.8347) || (lat < 0.8293 || lat > 55.8271);
