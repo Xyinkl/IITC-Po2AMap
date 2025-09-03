@@ -87,6 +87,47 @@ function wrapper(plugin_info) {
                 localStorage.setItem('amapBtnPos', JSON.stringify({left:left,top:top}));
             });
         });
+        // 针对移动端优化按钮位置和拖拽体验
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        }
+        if(isMobile()){
+            imgBtn.css({
+                left: '10px',
+                top: 'auto',
+                bottom: '20%',
+                transform: 'none',
+                width: '48px',
+                height: '48px'
+            });
+            imgBtn.find('svg').attr('width', '45').attr('height', '45');
+        }
+        // 移动端拖拽适配 touch 事件
+        var dragStart = null;
+        imgBtn.on('touchstart', function(e) {
+            var touch = e.originalEvent.touches[0];
+            dragStart = {
+                x: touch.clientX,
+                y: touch.clientY,
+                left: parseInt(imgBtn.css('left')),
+                top: parseInt(imgBtn.css('top')) || window.innerHeight * 0.2
+            };
+        });
+        imgBtn.on('touchmove', function(e) {
+            if(!dragStart) return;
+            var touch = e.originalEvent.touches[0];
+            var dx = touch.clientX - dragStart.x;
+            var dy = touch.clientY - dragStart.y;
+            imgBtn.css('left', (dragStart.left + dx) + 'px');
+            imgBtn.css('top', (dragStart.top + dy) + 'px');
+        });
+        imgBtn.on('touchend', function(e) {
+            dragStart = null;
+            // 记忆位置
+            var left = imgBtn.css('left');
+            var top = imgBtn.css('top');
+            localStorage.setItem('amapBtnPos', JSON.stringify({left:left,top:top}));
+        });
         // 读取记忆位置
         var pos = localStorage.getItem('amapBtnPos');
         if(pos){
