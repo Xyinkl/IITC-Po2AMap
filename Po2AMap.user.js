@@ -2,7 +2,7 @@
 // @id 	 iitc-Po2AMap
 // @name 	 IITC Plugin: Portal to AMap
 // @namespace 	 https://github.com/Xyinkl/IITC-Po2AMap
-// @version 	 0.0.8
+// @version 	 0.0.9
 // @updateURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/refs/heads/main/Po2AMap.user.js
 // @downloadURL 	 https://github.com/Xyinkl/IITC-Po2AMap/raw/refs/heads/main/Po2AMap.user.js
 // @description 	 Just a iitc plugin to convert Portal location to Chinese Map Provider AMAP. With this you can get precise portal location in AMAP, and just navigate to it! And do whatever you want. 
@@ -18,7 +18,7 @@ function wrapper(plugin_info) {
     var self = window.plugin.portal2amap;
     self.id = 'PoAMap';
     self.title = '打开高德链接';
-    self.version = '0.0.8';
+    self.version = '0.0.9';
     self.author = 'Xyinkl';
     self.outOfChina = function(lat, lon) {
         return (lon < 72.004 || lon > 137.8347) || (lat < 0.8293 || lat > 55.8271);
@@ -155,7 +155,18 @@ function wrapper(plugin_info) {
                 return;
             }
             var gcj = self.wgs84togcj02(lon, lat);
-            var amapUrl = 'https://uri.amap.com/marker?position=' + gcj[0] + ',' + gcj[1];
+            // 获取Portal名称
+            var name = '';
+            if (portalObj && portalObj.options && portalObj.options.data && portalObj.options.data.title) {
+                name = portalObj.options.data.title;
+            } else if (portalObj && portalObj.options && portalObj.options.data && portalObj.options.data.name) {
+                name = portalObj.options.data.name;
+            } else if (portalObj && portalObj.options && portalObj.options.data && portalObj.options.data.portalTitle) {
+                name = portalObj.options.data.portalTitle;
+            }
+            // URL编码
+            var encodedName = encodeURIComponent(name);
+            var amapUrl = 'https://uri.amap.com/marker?position=' + gcj[0] + ',' + gcj[1] + '&name=' + encodedName + '&coordinate=gaode&callnative=0';
             console.log('[portal2amap] amap url:', amapUrl);
             window.open(amapUrl, '_blank');
         });
